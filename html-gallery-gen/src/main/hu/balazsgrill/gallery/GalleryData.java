@@ -132,12 +132,14 @@ public class GalleryData implements IGenerationTask{
 			Map<String, String> ps = new HashMap<>();
 			ps.put("link", "..");
 			ps.put("name", "..");
+			ps.put("folder", options.rootUrl+"folder.png");
 			links.append(Template.getTemplate(Template.LINK_GALLERY).emit(ps));
 		}
 		for(GalleryData subg : subGalleries){
 			Map<String, String> ps = new HashMap<>();
 			ps.put("link", subg.name);
 			ps.put("name", subg.name);
+			ps.put("folder", options.rootUrl+"folder.png");
 			links.append(Template.getTemplate(Template.LINK_GALLERY).emit(ps));
 		}
 		for(int i=0;i<images.size();i++){

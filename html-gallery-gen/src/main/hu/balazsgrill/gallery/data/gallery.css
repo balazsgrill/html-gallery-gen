@@ -4,6 +4,11 @@ body{
 }
 a{
 	border : 0;
+	display : inlinde-block;
+	text-decoration: none;
+	text-align: center;
+	font-size: 0.5em;
+	font-weight: bold;
 }
 #modal{
 	background-color : rgba(0,0,0,0.75);
