@@ -1,0 +1,1 @@
+<a href="{{image}}" onClick="return imgClick({{index}})"><img src="{{thumb}}" ></img>{{name}}</a>

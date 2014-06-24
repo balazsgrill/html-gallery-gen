@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     2014.06.24. 9:54:40                                                        
+
+     project    
+     description
+                   
+     balazs.grill                                                                
+     ====================================================================== -->
+<project name="html-gallery-gen" default="jar">
+    <description>
+            description
+    </description>
+
+    <target name="jar">
+    	<mkdir dir="bin"/>
+    	<javac srcdir="src/main"
+    	       destdir="bin"
+    	  />
+    	<jar destfile="html-gallery.jar" basedir="bin">
+    		<manifest>
+    			<attribute name="Implementation-Title" value="HTML gallery generator"/>
+    			<attribute name="Implementation-Version" value="0.1"/>
+    		</manifest>
+    	</jar>
+    </target>
+
+
+	<target name="jar-test" depends="jar">
+		<mkdir dir="bin-test"/>
+	    <javac srcdir="src/test"
+	           destdir="bin-test" classpath="html-gallery.jar"
+	     />
+	    <jar destfile="html-gallery-test.jar" basedir="bin-test">
+	    	<manifest>
+	    		<attribute name="Implementation-Title" value="HTML gallery generator"/>
+	    		<attribute name="Implementation-Version" value="0.1"/>
+	    		<attribute name="Class-Path" value="html-gallery.jar"/>
+	    	</manifest>
+	    </jar>
+	</target>
+
+	<target name="test" depends="jar-test">
+		<junit printsummary="yes" haltonfailure="yes">
+		  <classpath>
+		    <pathelement location="html-gallery-test.jar"/>
+		  </classpath>
+
+		  <formatter type="plain"/>
+
+		  <test name="hu.balazsgrill.gallery.GalleryTests" haltonfailure="no" outfile="result">
+		    <formatter type="xml"/>
+		  </test>
+
+		</junit>
+	</target>
+	
+</project>

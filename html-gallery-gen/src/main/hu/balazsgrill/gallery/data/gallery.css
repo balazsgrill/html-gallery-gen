@@ -1,0 +1,52 @@
+body{
+	font-family: Arial, Helvetica, sans-serif;
+	user-select : none;
+}
+a{
+	border : 0;
+}
+#modal{
+	background-color : rgba(0,0,0,0.75);
+	display :none;
+	position:fixed;
+    width:100%;
+    height:100%;
+    top:0px;
+    left:0px;
+    z-index:1000;
+}
+#modalImg{
+	display : block;
+	position: relative;
+	height:90%;
+	margin-left: auto;
+    margin-right: auto;
+	margin-top: 2%;
+	margin-bottom:auto;
+}
+#prev{
+	display: block;
+	position: fixed;
+	z-index:1100;
+	left:0;
+	width:10%;
+	height:100%;
+	top:0;
+	background : none;
+}
+#prev:HOVER{
+	background : rgba(0,0,1,0.5);
+}
+#next{
+	display: block;
+	position: fixed;
+	z-index:1100;
+	right:0;
+	width:10%;
+	height:100%;
+	top:0;
+	background : none;
+}
+#next:HOVER{
+	background : rgba(0,0,1,0.5);
+}
