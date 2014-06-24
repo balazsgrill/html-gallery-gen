@@ -17,6 +17,9 @@
     	<javac srcdir="src/main"
     	       destdir="bin"
     	  />
+    	<copy todir="bin">
+    	   <fileset dir="src/main" excludes="**/*.java"/>
+    	</copy>
     	<jar destfile="html-gallery.jar" basedir="bin">
     		<manifest>
     			<attribute name="Implementation-Title" value="HTML gallery generator"/>
@@ -31,6 +34,9 @@
 	    <javac srcdir="src/test"
 	           destdir="bin-test" classpath="html-gallery.jar"
 	     />
+		<copy todir="bin-test">
+		  	<fileset dir="src/test" excludes="**/*.java"/>
+		</copy>
 	    <jar destfile="html-gallery-test.jar" basedir="bin-test">
 	    	<manifest>
 	    		<attribute name="Implementation-Title" value="HTML gallery generator"/>
