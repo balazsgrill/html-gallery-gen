@@ -8,9 +8,9 @@
 </head><body>
 
 {{image-list}}
-<div id="modal" onClick="modalClick(); return false;">
-	<a id="prev" onClick="prev(event); return false;" ></a>
-	<img id="modalImg" onClick="goImage()"/>
-	<a id="next" onClick="next(event); return false;" ></a>
+<div id="modal" onClick="modalClick(); return false;" class="unselectable">
+	<a id="prev" onClick="prev(event); return false;" class="unselectable"></a>
+	<img id="modalImg" onClick="goImage()" class="unselectable"/>
+	<a id="next" onClick="next(event); return false;" class="unselectable" ></a>
 </div>
 </body></html>

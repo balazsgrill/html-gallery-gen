@@ -1,1 +1,1 @@
-<a href="{{image}}" onClick="return imgClick({{index}})"><img src="{{thumb}}" ></img><br/>{{name}}</a>
+<div class="linkdiv unselectable"><a href="{{image}}" onClick="return imgClick({{index}})" class="unselectable"><img src="{{thumb}}" class="unselectable"></img><br/>{{name}}</a></div>

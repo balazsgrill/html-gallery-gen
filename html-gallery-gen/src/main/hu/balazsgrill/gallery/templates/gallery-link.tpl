@@ -1,1 +1,1 @@
-<a href="{{link}}/index.html"><img src="{{folder}}" ></img><br/>{{name}}</a>
+<div class="linkdiv unselectable"><a href="{{link}}/index.html"><img src="{{folder}}" ></img><br/>{{name}}</a></div>
