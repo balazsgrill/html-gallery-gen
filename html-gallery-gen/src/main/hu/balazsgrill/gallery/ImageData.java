@@ -117,32 +117,25 @@ public class ImageData implements IGenerationTask<ImageData>{
 		double sx = ((double)size.x)/((double)source.getWidth());
 		double sy = ((double)size.y)/((double)source.getHeight());
 		
-		AffineTransform rescale = AffineTransform.getScaleInstance(sx, sy);
+		AffineTransform transform = AffineTransform.getScaleInstance(sx, sy);
 		
-		AffineTransform rotate = null;
 		switch(orientation){
 		case Rotate180:
-			rotate = AffineTransform.getQuadrantRotateInstance(2);
-			rotate.concatenate(AffineTransform.getTranslateInstance(x, y));
+			transform.quadrantRotate(2);
 			break;
 		case Rotate90:
-			rotate = AffineTransform.getQuadrantRotateInstance(1);
-			rotate.concatenate(AffineTransform.getTranslateInstance(x, 0));
+			transform.quadrantRotate(1);
 			break;
 		case Rottate270:
-			rotate = AffineTransform.getQuadrantRotateInstance(3);
-			rotate.concatenate(AffineTransform.getTranslateInstance(0, y));
+			transform.quadrantRotate(-1);
 			break;
 		case Normal:
 		default:
-			rotate = AffineTransform.getQuadrantRotateInstance(0);
 			break;
 		
 		}
 		
-		rotate.concatenate(rescale);
-		
-		graphics2D.drawImage(source, rotate, null);
+		graphics2D.drawImage(source, transform, null);
 		graphics2D.dispose();
 		return scaledImage;
 	}
