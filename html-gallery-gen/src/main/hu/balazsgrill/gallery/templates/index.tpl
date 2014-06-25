@@ -5,7 +5,7 @@
 		var images = {{images-data}};
 	</script>
 	<script type="text/javascript" src="{{gallery.js}}" ></script>
-</head><body>
+</head><body onkeydown="handleKey(event);">
 
 {{image-list}}
 <div id="modal" onClick="modalClick(); return false;" class="unselectable">
