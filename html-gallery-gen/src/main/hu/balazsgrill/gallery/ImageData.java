@@ -127,7 +127,7 @@ public class ImageData implements IGenerationTask<ImageData>{
 			transform.quadrantRotate(-1, ((double)x)/2, ((double)y)/2);
 			break;
 		case Rottate270:
-			transform.quadrantRotate(1, ((double)x)/2, ((double)y)/2);
+			transform.quadrantRotate(1);
 			break;
 		case Normal:
 		default:
