@@ -9,12 +9,15 @@ body{
 	-ms-user-select: none;
 	user-select: none;
 }
+.linkdiv{
+	display : inline-block;
+}
 a{
 	border : 0;
-	display : inlinde-block;
+	display : inline-block;
 	text-decoration: none;
 	text-align: center;
-	font-size: 0.5em;
+	font-size: 0.8em;
 	font-weight: bold;
 }
 #modal{
