@@ -48,12 +48,24 @@ public class GalleryData implements IGenerationTask{
 		return new File(targetDir, "index.html");
 	}
 	
+	private static String asciizeString(String value){
+		StringBuilder sb = new StringBuilder();
+		for(char c : value.toCharArray()){
+			if (Character.isJavaIdentifierPart(c)){
+				sb.append(c);
+			}else{
+				sb.append("_");
+			}
+		}
+		return sb.toString();
+	}
+	
 	public GalleryData(GalleryData parent, String name) throws MalformedURLException {
 		this.parent = parent;
 		this.name = name;
 		this.options = parent.options;
 		this.sourceDir = new File(parent.sourceDir, name);
-		this.targetDir = new File(parent.targetDir, name);
+		this.targetDir = new File(parent.targetDir, asciizeString(name));
 	}
 	
 	public List<GalleryData> getSubGalleries() {
@@ -121,6 +133,8 @@ public class GalleryData implements IGenerationTask{
 		Map<String, String> indexParams = new HashMap<>();
 		indexParams.put("gallery.css", options.rootUrl+"gallery.css");
 		indexParams.put("gallery.js", options.rootUrl+"gallery.js");
+		indexParams.put("favicon", options.rootUrl+"camera-photo.png");
+		indexParams.put("name", name);
 		
 		StringBuilder imageData = new StringBuilder();
 		imageData.append("[\n");

@@ -5,6 +5,9 @@
 		var images = {{images-data}};
 	</script>
 	<script type="text/javascript" src="{{gallery.js}}" ></script>
+	<meta charset="UTF-8" ></meta>
+	<title>{{name}}</title>
+	<link rel="shortcut icon" type="image/png" href="{{favicon}}"/>
 </head><body onkeydown="handleKey(event);">
 
 {{image-list}}

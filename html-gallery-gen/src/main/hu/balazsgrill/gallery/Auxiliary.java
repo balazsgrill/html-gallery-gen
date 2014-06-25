@@ -25,6 +25,7 @@ public class Auxiliary {
 		saveData("folder.png", targetDir);
 		saveData("gallery.css", targetDir);
 		saveData("gallery.js", targetDir);
+		saveData("camera-photo.png", targetDir);
 	}
 	
 	private static void saveData(String data, File targetDir) throws IOException{

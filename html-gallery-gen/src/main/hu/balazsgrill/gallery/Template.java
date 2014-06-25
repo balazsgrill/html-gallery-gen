@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -49,7 +50,7 @@ public class Template {
 		}finally{
 			stream.close();
 		}
-		String template = new String(data);
+		String template = new String(data, StandardCharsets.UTF_8);
 		List<String> items = new LinkedList<>();
 		
 		int index = 0;
@@ -77,7 +78,7 @@ public class Template {
 		try{
 			stream = new FileOutputStream(target);
 			String data = emit(values);
-			stream.write(data.getBytes());
+			stream.write(data.getBytes(StandardCharsets.UTF_8));
 			stream.flush();
 		}finally{
 			if (stream != null){
