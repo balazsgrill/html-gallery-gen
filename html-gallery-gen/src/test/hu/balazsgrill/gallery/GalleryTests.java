@@ -68,7 +68,7 @@ public class GalleryTests {
 		File trgDir = new File(workDir,"/../html-gallery-test/target").getCanonicalFile();
 		
 		GalleryOptions opts = new GalleryOptions();
-		opts.rootUrl = "/gallery/";
+		opts.rootUrl = "/gallery-test/";
 		opts.sourceDir = srcDir;
 		opts.targetDir = trgDir;
 		

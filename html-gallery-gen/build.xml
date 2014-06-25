@@ -24,6 +24,7 @@
     		<manifest>
     			<attribute name="Implementation-Title" value="HTML gallery generator"/>
     			<attribute name="Implementation-Version" value="0.1"/>
+    			<attribute name="Main-Class" value="hu.balazsgrill.gallery.GeneratorMain"/>
     		</manifest>
     	</jar>
     </target>

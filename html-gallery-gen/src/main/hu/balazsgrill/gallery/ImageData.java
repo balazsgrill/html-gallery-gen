@@ -45,6 +45,11 @@ public class ImageData implements IGenerationTask{
 		return thumbFile;
 	}
 	
+	@Override
+	public String toString() {
+		return sourceFile.getName();
+	}
+	
 	/**
 	 * 
 	 */

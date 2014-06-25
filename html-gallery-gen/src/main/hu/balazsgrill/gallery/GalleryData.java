@@ -28,6 +28,11 @@ public class GalleryData implements IGenerationTask{
 	
 	private final GalleryOptions options;
 	
+	@Override
+	public String toString() {
+		return (parent != null ? parent.name : "") + "/" + name +"/";
+	}
+	
 	/**
 	 * 
 	 */
