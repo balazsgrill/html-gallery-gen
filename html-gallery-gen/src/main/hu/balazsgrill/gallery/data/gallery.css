@@ -11,6 +11,11 @@ body{
 }
 .linkdiv{
 	display : inline-block;
+	margin: 5px;
+	padding: 5px;
+	border: 2px solid #999;
+	background-color: #ccc;
+	box-shadow: 5px 10px 15px #444;
 }
 a{
 	border : 0;
