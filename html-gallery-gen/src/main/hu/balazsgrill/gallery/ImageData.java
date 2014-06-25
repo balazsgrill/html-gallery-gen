@@ -124,7 +124,7 @@ public class ImageData implements IGenerationTask<ImageData>{
 			transform.quadrantRotate(2, ((double)x)/2, ((double)y)/2);
 			break;
 		case Rotate90:
-			transform.translate(-x,0);
+			transform.translate(0,-y);
 			transform.quadrantRotate(-1, 0, 0);
 			
 			break;
