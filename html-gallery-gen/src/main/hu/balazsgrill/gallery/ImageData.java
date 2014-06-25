@@ -121,13 +121,13 @@ public class ImageData implements IGenerationTask<ImageData>{
 		
 		switch(orientation){
 		case Rotate180:
-			transform.quadrantRotate(2);
+			transform.quadrantRotate(2, ((double)x)/2, ((double)y)/2);
 			break;
 		case Rotate90:
-			transform.quadrantRotate(1);
+			transform.quadrantRotate(1, ((double)x)/2, ((double)y)/2);
 			break;
 		case Rottate270:
-			transform.quadrantRotate(-1);
+			transform.quadrantRotate(-1, ((double)x)/2, ((double)y)/2);
 			break;
 		case Normal:
 		default:
