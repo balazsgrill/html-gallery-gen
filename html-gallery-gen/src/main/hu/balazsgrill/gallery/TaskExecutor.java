@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class TaskExecutor {
 
-	private final List<IGenerationTask> tasks;
+	private final List<IGenerationTask<?>> tasks;
 	
 	/**
 	 * 
@@ -32,7 +32,7 @@ public class TaskExecutor {
 	}
 
 	public void execute(boolean force){
-		for(IGenerationTask task : tasks){
+		for(IGenerationTask<?> task : tasks){
 			if (force || task.isDirty()){
 				System.out.println(task.toString());
 				try {

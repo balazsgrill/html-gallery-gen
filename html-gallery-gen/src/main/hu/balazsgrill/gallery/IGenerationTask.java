@@ -9,7 +9,7 @@ import java.io.IOException;
  * @author balazs.grill
  *
  */
-public interface IGenerationTask {
+public interface IGenerationTask<T extends IGenerationTask<T>> extends Comparable<T> {
 
 	public boolean isDirty();
 	

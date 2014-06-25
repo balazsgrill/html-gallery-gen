@@ -6,6 +6,7 @@ package hu.balazsgrill.gallery;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.Map;
  * @author balazs.grill
  *
  */
-public class GalleryData implements IGenerationTask{
+public class GalleryData implements IGenerationTask<GalleryData>{
 
 	private final File sourceDir;
 	private final File targetDir;
@@ -104,6 +105,9 @@ public class GalleryData implements IGenerationTask{
 		for(GalleryData subg : subGalleries){
 			subg.collectData();
 		}
+		
+		Collections.sort(subGalleries);
+		Collections.sort(images);
 	}
 	
 	public File getTargetDir() {
@@ -173,5 +177,12 @@ public class GalleryData implements IGenerationTask{
 		indexParams.put("image-list", links.toString());
 		
 		Template.getTemplate(Template.INDEX_HTML).emitToFile(indexParams, getIndexHtml());
+	}
+
+	@Override
+	public int compareTo(GalleryData o) {
+		String name = this.name;
+		String oname = o.name;
+		return name.compareTo(oname);
 	}
 }

@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
  * @author balazs.grill
  *
  */
-public class ImageData implements IGenerationTask{
+public class ImageData implements IGenerationTask<ImageData>{
 
 	private static final String[] IMG_EXTS = new String[]{".jpg", ".jpeg", ".png", ".tiff", ".tif"};
 	
@@ -101,5 +101,12 @@ public class ImageData implements IGenerationTask{
 		
 		ImageIO.write(target, "jpg", targetFile);
 		ImageIO.write(thumb, "jpg", thumbFile);
+	}
+
+	@Override
+	public int compareTo(ImageData o) {
+		String name = toString();
+		String oname = o.toString();
+		return name.compareTo(oname);
 	}
 }
