@@ -165,7 +165,7 @@ public class GalleryData implements IGenerationTask<GalleryData>{
 		}
 		for(GalleryData subg : subGalleries){
 			Map<String, String> ps = new HashMap<>();
-			ps.put("link", subg.name);
+			ps.put("link", subg.targetDir.getName());
 			ps.put("name", subg.name);
 			ps.put("folder", options.rootUrl+"folder.png");
 			links.append(Template.getTemplate(Template.LINK_GALLERY).emit(ps));
