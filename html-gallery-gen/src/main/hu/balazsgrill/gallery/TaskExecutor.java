@@ -3,7 +3,6 @@
  */
 package hu.balazsgrill.gallery;
 
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -37,7 +36,7 @@ public class TaskExecutor {
 				System.out.println(task.toString());
 				try {
 					task.commit();
-				} catch (IOException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}

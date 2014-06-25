@@ -3,7 +3,6 @@
  */
 package hu.balazsgrill.gallery;
 
-import java.io.IOException;
 
 /**
  * @author balazs.grill
@@ -13,6 +12,6 @@ public interface IGenerationTask<T extends IGenerationTask<T>> extends Comparabl
 
 	public boolean isDirty();
 	
-	public void commit() throws IOException;
+	public void commit() throws Exception;
 	
 }

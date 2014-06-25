@@ -47,7 +47,7 @@ public class GalleryTests {
 		root.collectData();
 		
 		assertEquals(1, root.getSubGalleries().size());
-		assertEquals(3, root.getImages().size());
+		assertEquals(4, root.getImages().size());
 		assertEquals(3, root.getSubGalleries().get(0).getImages().size());
 		
 	}

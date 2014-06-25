@@ -6,6 +6,8 @@ package hu.balazsgrill.gallery;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -50,12 +52,15 @@ public class GalleryData implements IGenerationTask<GalleryData>{
 	}
 	
 	private static String asciizeString(String value){
+		String decomposed = Normalizer.normalize(value, Form.NFD);
+	    // removing diacritics
+	    String removed = decomposed.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
 		StringBuilder sb = new StringBuilder();
-		for(char c : value.toCharArray()){
-			if (Character.isJavaIdentifierPart(c)){
-				sb.append(c);
-			}else{
+		for(char c : removed.toCharArray()){
+			if (Character.isWhitespace(c)){
 				sb.append("_");
+			}else{
+				sb.append(c);
 			}
 		}
 		return sb.toString();

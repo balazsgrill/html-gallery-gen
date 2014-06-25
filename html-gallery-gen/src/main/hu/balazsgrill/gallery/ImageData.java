@@ -6,18 +6,24 @@ package hu.balazsgrill.gallery;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.imaging.ImageProcessingException;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.exif.ExifIFD0Directory;
+
 /**
  * @author balazs.grill
  *
  */
 public class ImageData implements IGenerationTask<ImageData>{
-
+	
 	private static final String[] IMG_EXTS = new String[]{".jpg", ".jpeg", ".png", ".tiff", ".tif"};
 	
 	public static boolean isImage(File file){
@@ -50,6 +56,28 @@ public class ImageData implements IGenerationTask<ImageData>{
 		return sourceFile.getName();
 	}
 	
+	public ImageOrientation getOrientation() throws ImageProcessingException, IOException{
+		Metadata metadata = ImageMetadataReader.readMetadata(sourceFile);
+		// obtain the Exif directory
+		ExifIFD0Directory directory = metadata.getDirectory(ExifIFD0Directory.class);
+
+		// query the tag's value
+		Integer orientation = directory.getInteger(ExifIFD0Directory.TAG_ORIENTATION);
+		if (orientation != null){
+			switch(orientation.intValue()){
+			case 1:
+				return ImageOrientation.Normal;
+			case 8:
+				return ImageOrientation.Rotate90;
+			case 3:
+				return ImageOrientation.Rotate180;
+			case 6:
+				return ImageOrientation.Rottate270;
+			}
+		}
+		return ImageOrientation.Normal;
+	}
+	
 	/**
 	 * 
 	 */
@@ -79,25 +107,56 @@ public class ImageData implements IGenerationTask<ImageData>{
 				(int)Math.round(size.y*scale));
 	}
 	
-	public static BufferedImage rescale(BufferedImage source, Point size){
-		BufferedImage scaledImage = new BufferedImage(size.x, size.y, BufferedImage.TYPE_INT_RGB);
+	public static BufferedImage rescale(BufferedImage source, Point size, ImageOrientation orientation){
+		int x = orientation.isVertical() ? size.y : size.x;
+		int y = orientation.isVertical() ? size.x : size.y;
+		BufferedImage scaledImage = new BufferedImage(x, y, BufferedImage.TYPE_INT_RGB);
 		Graphics2D graphics2D = scaledImage.createGraphics();
-		graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-		RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-		graphics2D.drawImage(source, 0, 0, size.x, size.y, null);
+		graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+		
+		double sx = ((double)size.x)/((double)source.getWidth());
+		double sy = ((double)size.y)/((double)source.getHeight());
+		
+		AffineTransform rescale = AffineTransform.getScaleInstance(sx, sy);
+		
+		AffineTransform rotate = null;
+		switch(orientation){
+		case Rotate180:
+			rotate = AffineTransform.getQuadrantRotateInstance(2);
+			rotate.concatenate(AffineTransform.getTranslateInstance(x, y));
+			break;
+		case Rotate90:
+			rotate = AffineTransform.getQuadrantRotateInstance(1);
+			rotate.concatenate(AffineTransform.getTranslateInstance(x, 0));
+			break;
+		case Rottate270:
+			rotate = AffineTransform.getQuadrantRotateInstance(3);
+			rotate.concatenate(AffineTransform.getTranslateInstance(0, y));
+			break;
+		case Normal:
+		default:
+			rotate = AffineTransform.getQuadrantRotateInstance(0);
+			break;
+		
+		}
+		
+		rotate.concatenate(rescale);
+		
+		graphics2D.drawImage(source, rotate, null);
 		graphics2D.dispose();
 		return scaledImage;
 	}
 	
 	@Override
-	public void commit() throws IOException{
+	public void commit() throws Exception{
 		BufferedImage source = ImageIO.read(sourceFile);
 		Point size = new Point(source.getWidth(), source.getHeight());
 		Point targetSize = rescale(size, options.targetDiagonal);
 		Point thumbSize = rescale(size, options.thumbDiagonal);
 		
-		BufferedImage target = rescale(source, targetSize);
-		BufferedImage thumb = rescale(source, thumbSize);
+		ImageOrientation orientation = getOrientation();
+		BufferedImage target = rescale(source, targetSize, orientation);
+		BufferedImage thumb = rescale(source, thumbSize, orientation);
 		
 		ImageIO.write(target, "jpg", targetFile);
 		ImageIO.write(thumb, "jpg", thumbFile);
