@@ -3,11 +3,18 @@ package hu.balazsgrill.gallery;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.imageio.ImageIO;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -78,6 +85,34 @@ public class GalleryTests {
 		TaskExecutor executor = new TaskExecutor(root);
 		executor.execute(true);
 		
+	}
+	
+	@Test
+	public void rotate() throws Exception{
+		InputStream folderIS = Auxiliary.getData("folder.png");
+		BufferedImage im = ImageIO.read(folderIS);
+		folderIS.close();
+		
+		BufferedImage result = new BufferedImage(500, 500, BufferedImage.TYPE_INT_RGB);
+		Graphics2D graphics2D = result.createGraphics();
+		graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+		
+		
+		AffineTransform at = AffineTransform.getTranslateInstance(250, 250);
+		at.scale(1.5, 1.5);
+		
+		graphics2D.drawImage(im, at, null);
+//		at.translate(0, im.getWidth());
+//		at.quadrantRotate(-1);
+		at.translate(im.getWidth(), im.getHeight());
+		at.quadrantRotate(2);	
+		
+		graphics2D.drawImage(im, at, null);
+		
+		graphics2D.dispose();
+		File trgDir = new File(workDir,"/../html-gallery-test/target").getCanonicalFile();
+		File resultFile = new File(trgDir, "result.png");
+		ImageIO.write(result, "png", resultFile);
 	}
 	
 }

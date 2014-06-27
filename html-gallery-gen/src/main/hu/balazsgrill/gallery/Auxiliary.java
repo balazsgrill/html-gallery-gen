@@ -27,8 +27,12 @@ public class Auxiliary {
 		saveData("camera-photo.png", targetDir);
 	}
 	
+	public static InputStream getData(String data){
+		return Auxiliary.class.getResourceAsStream("/hu/balazsgrill/gallery/data/"+data);
+	}
+	
 	private static void saveData(String data, File targetDir) throws IOException{
-		InputStream stream = Auxiliary.class.getResourceAsStream("/hu/balazsgrill/gallery/data/"+data);
+		InputStream stream = getData(data);
 		File target = new File(targetDir, data);
 		FileOutputStream out = new FileOutputStream(target);
 		try{
