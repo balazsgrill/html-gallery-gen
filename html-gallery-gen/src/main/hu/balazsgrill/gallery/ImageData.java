@@ -140,7 +140,7 @@ public class ImageData implements IGenerationTask<ImageData>{
 		
 		double[] matrix = new double[6];
 		transform.getMatrix(matrix);
-		System.out.println("tranform: "+java.util.Arrays.toString(matrix));
+		//System.out.println("tranform: "+java.util.Arrays.toString(matrix));
 		graphics2D.drawImage(source, transform, null);
 		graphics2D.dispose();
 		return scaledImage;
