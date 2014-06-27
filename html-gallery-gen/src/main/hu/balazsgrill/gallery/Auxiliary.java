@@ -18,7 +18,6 @@ public class Auxiliary {
 	 * 
 	 */
 	private Auxiliary() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public static void emit(File targetDir) throws IOException{
