@@ -33,7 +33,7 @@ public class GalleryData implements IGenerationTask<GalleryData>{
 	
 	@Override
 	public String toString() {
-		return (parent != null ? parent.toString() : "") + "/" + name +"/";
+		return (parent != null ? parent.toString() : "/") + name +"/";
 	}
 	
 	/**
