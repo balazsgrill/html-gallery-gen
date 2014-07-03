@@ -57,6 +57,7 @@ public class ImageData implements IGenerationTask<ImageData>{
 	}
 	
 	public ImageOrientation getOrientation() throws ImageProcessingException, IOException{
+		try{
 		Metadata metadata = ImageMetadataReader.readMetadata(sourceFile);
 		// obtain the Exif directory
 		ExifIFD0Directory directory = metadata.getDirectory(ExifIFD0Directory.class);
@@ -74,6 +75,9 @@ public class ImageData implements IGenerationTask<ImageData>{
 			case 6:
 				return ImageOrientation.Rottate270;
 			}
+		}
+		}catch(Throwable t){
+			//No orientation information, no rotation will be done
 		}
 		return ImageOrientation.Normal;
 	}
