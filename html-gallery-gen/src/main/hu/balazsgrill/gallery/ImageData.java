@@ -83,7 +83,7 @@ public class ImageData implements IGenerationTask<ImageData>{
 	 */
 	public ImageData(GalleryData parent, File f) {
 		this.sourceFile = f;
-		this.targetFile = new File(parent.getTargetDir(), f.getName());
+		this.targetFile = new File(parent.getDataDir(), f.getName());
 		this.thumbFile = new File(parent.getTargetDir(), "thumb_"+f.getName());
 		this.options = parent.getOptions();
 	}

@@ -22,6 +22,7 @@ public class GalleryData implements IGenerationTask<GalleryData>{
 
 	private final File sourceDir;
 	private final File targetDir;
+	private final File dataDir;
 	
 	private final GalleryData parent;
 	private final String name;
@@ -45,6 +46,12 @@ public class GalleryData implements IGenerationTask<GalleryData>{
 		this.options = options;
 		this.sourceDir = options.sourceDir;
 		this.targetDir = options.targetDir;
+		
+		if (options.dataDir == null){
+			dataDir = targetDir;
+		}else{
+			dataDir = options.dataDir;
+		}
 	}
 	
 	private File getIndexHtml(){
@@ -72,6 +79,7 @@ public class GalleryData implements IGenerationTask<GalleryData>{
 		this.options = parent.options;
 		this.sourceDir = new File(parent.sourceDir, name);
 		this.targetDir = new File(parent.targetDir, asciizeString(name));
+		this.dataDir = new File(parent.dataDir, asciizeString(name));
 	}
 	
 	public List<GalleryData> getSubGalleries() {
@@ -119,6 +127,10 @@ public class GalleryData implements IGenerationTask<GalleryData>{
 		return targetDir;
 	}
 	
+	public File getDataDir(){
+		return dataDir;
+	}
+	
 	@Override
 	public boolean isDirty(){
 		if (!targetDir.exists()) return true;
@@ -133,6 +145,7 @@ public class GalleryData implements IGenerationTask<GalleryData>{
 	@Override
 	public void commit() throws IOException {
 		targetDir.mkdirs();
+		dataDir.mkdirs();
 		
 		if (parent == null){
 			/* Put utility files next to root gallery */
@@ -148,8 +161,9 @@ public class GalleryData implements IGenerationTask<GalleryData>{
 		StringBuilder imageData = new StringBuilder();
 		imageData.append("[\n");
 		for(ImageData id : images){
-			imageData.append("\t{image: \"");imageData.append(id.getTargetFile().getName());imageData.append("\", origin: \"");
-			imageData.append(id.getTargetFile().getName());imageData.append("\"},\n");
+			String imagedata = getDataPath()+id.getTargetFile().getName();
+			imageData.append("\t{image: \"");imageData.append(imagedata);imageData.append("\", origin: \"");
+			imageData.append(imagedata);imageData.append("\"},\n");
 		}
 		imageData.append("]");
 		indexParams.put("images-data", imageData.toString());
@@ -173,7 +187,7 @@ public class GalleryData implements IGenerationTask<GalleryData>{
 		for(int i=0;i<images.size();i++){
 			ImageData imd = images.get(i);
 			Map<String, String> ps = new HashMap<>();
-			ps.put("image", imd.getTargetFile().getName());
+			ps.put("image", getDataPath()+imd.getTargetFile().getName());
 			ps.put("thumb", imd.getThumbFile().getName());
 			ps.put("name", imd.getTargetFile().getName());
 			ps.put("index", i+"");
@@ -182,6 +196,25 @@ public class GalleryData implements IGenerationTask<GalleryData>{
 		indexParams.put("image-list", links.toString());
 		
 		Template.getTemplate(Template.INDEX_HTML).emitToFile(indexParams, getIndexHtml());
+	}
+	
+	public String getPath(){
+		if (parent == null){
+			return "";
+		}else{
+			return parent.getPath()+asciizeString(name)+"/";
+		}
+	}
+	
+	public String getTargetPath(){
+		return options.rootUrl+getPath();
+	}
+	
+	public String getDataPath(){
+		if (options.dataUrl == null){
+			return getTargetPath();
+		}
+		return options.dataUrl+getPath();
 	}
 
 	@Override

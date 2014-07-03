@@ -78,6 +78,8 @@ public class GalleryTests {
 		opts.rootUrl = "/gallery-test/";
 		opts.sourceDir = srcDir;
 		opts.targetDir = trgDir;
+		opts.dataDir = new File(trgDir, "data");
+		opts.dataUrl = "/gallery-test/data/";
 		
 		GalleryData root = new GalleryData(opts);
 		root.collectData();

@@ -15,8 +15,11 @@ import java.util.Map.Entry;
 public class GalleryOptions {
 
 	public String rootUrl = null;
+	public String dataUrl = null;
+	
 	public File sourceDir = null;
 	public File targetDir = null;
+	public File dataDir = null;
 	
 	public int targetDiagonal = 1600;
 	
@@ -28,6 +31,10 @@ public class GalleryOptions {
 		if (!sourceDir.exists()) throw new IllegalArgumentException("sourceDir does not exist!");
 		if (!sourceDir.isDirectory()) throw new IllegalArgumentException("sourceDir is not a directory!");
 		if (targetDir == null) throw new IllegalArgumentException("targetDir is not set!");
+		
+		if (dataDir != null){
+			if (dataUrl == null) throw new IllegalArgumentException("if dataDir is set, dataUrl must be set also!");
+		}
 	}
 	
 	private void setField(Field field, String value) throws NumberFormatException, IllegalArgumentException, IllegalAccessException{
