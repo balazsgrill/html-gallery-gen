@@ -54,14 +54,14 @@
 		    <pathelement location="html-gallery-test.jar"/>
 		  </classpath>
 
-		  <formatter type="plain"/>
+		  <formatter type="xml"/>
 
 		  <test name="hu.balazsgrill.gallery.GalleryTests" haltonfailure="no" outfile="result">
 		    <formatter type="xml"/>
 		  </test>
 
 		</junit>
-		<junitreport todir="${basedir}">
+		<!--junitreport todir="${basedir}">
     			<fileset dir="${basedir}">
 				<include name="result.xml"/>
 					
@@ -70,7 +70,7 @@
         			styledir="junitreport"
         			format="noframes">
 			 </report>
-		</junitreport>
+		</junitreport-->
 	</target>
 	
 </project>
