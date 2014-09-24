@@ -61,7 +61,7 @@
 		  </test>
 
 		</junit>
-		<junitreport todir="${basedir}">
+		<junitreport todir="${basedir}"> 
     			<fileset dir="${basedir}">
 				<include name="result.xml"/>
 					
