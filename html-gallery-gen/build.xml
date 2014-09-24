@@ -14,7 +14,7 @@
 
     <target name="jar">
     	<mkdir dir="bin"/>
-    	<javac srcdir="src/main" debug="true" debuglevel="lines,var,source"
+    	<javac srcdir="src/main" debug="true" debuglevel="lines,vars,source"
     	       destdir="bin" classpath="metadata-extractor-2.6.4.jar"
     	  />
     	<copy todir="bin">
@@ -33,7 +33,7 @@
 
 	<target name="jar-test" depends="jar">
 		<mkdir dir="bin-test"/>
-	    <javac srcdir="src/test"  debug="true" debuglevel="lines,var,source"
+	    <javac srcdir="src/test"  debug="true" debuglevel="lines,vars,source"
 	           destdir="bin-test" classpath="html-gallery.jar"
 	     />
 		<copy todir="bin-test">
