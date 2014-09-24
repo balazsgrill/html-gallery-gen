@@ -61,15 +61,11 @@
 		  </test>
 
 		</junit>
-		<junitreport todir="${basedir}"> 
-    			<fileset dir="${basedir}">
-				<include name="result.xml"/>
-					
-			</fileset>
-    			<report todir="${basedir}/html"
-        			styledir="junitreport"
-        			format="noframes">
-			 </report>
+		<junitreport todir="./reports">
+  			<fileset dir="./reports">
+    				<include name="TEST-*.xml"/>
+  			</fileset>
+  			<report format="frames" todir="./report/html"/>
 		</junitreport>
 	</target>
 	
