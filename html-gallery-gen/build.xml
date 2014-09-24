@@ -61,6 +61,16 @@
 		  </test>
 
 		</junit>
+		<junitreport todir="${basedir}">
+    			<fileset dir="${basedir}">
+				<include name="result.xml"/>
+					
+			</fileset>
+    			<report todir="${basedir}/html"
+        			styledir="junitreport"
+        			format="noframes">
+			 </report>
+		</junitreport>
 	</target>
 	
 </project>
