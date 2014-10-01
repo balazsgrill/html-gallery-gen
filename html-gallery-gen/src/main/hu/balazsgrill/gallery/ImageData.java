@@ -56,7 +56,7 @@ public class ImageData implements IGenerationTask<ImageData>{
 		return sourceFile.getName();
 	}
 	
-	public ImageOrientation getOrientation() throws ImageProcessingException, IOException{
+	public static ImageOrientation getOrientation(File sourceFile) throws ImageProcessingException, IOException{
 		try{
 		Metadata metadata = ImageMetadataReader.readMetadata(sourceFile);
 		// obtain the Exif directory
@@ -157,7 +157,7 @@ public class ImageData implements IGenerationTask<ImageData>{
 		Point targetSize = rescale(size, options.targetDiagonal);
 		Point thumbSize = rescale(size, options.thumbDiagonal);
 		
-		ImageOrientation orientation = getOrientation();
+		ImageOrientation orientation = getOrientation(sourceFile);
 		BufferedImage target = rescale(source, targetSize, orientation);
 		BufferedImage thumb = rescale(source, thumbSize, orientation);
 		

@@ -16,6 +16,7 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -87,6 +88,17 @@ public class GalleryTests {
 		TaskExecutor executor = new TaskExecutor(root);
 		executor.execute(true);
 		
+	}
+	
+	@Test
+	public void getOrientation() throws Exception{
+		File img = new File(workDir,"/../html-gallery-test/src/IMG_9142.JPG").getCanonicalFile();
+		ImageOrientation orientation = ImageData.getOrientation(img);
+		Assert.assertEquals(ImageOrientation.Rotate90, orientation);
+		
+		img = new File(workDir,"/../html-gallery-test/src/IMG_9467.JPG").getCanonicalFile();
+		orientation = ImageData.getOrientation(img);
+		Assert.assertEquals(ImageOrientation.Normal, orientation);
 	}
 	
 	@Test
