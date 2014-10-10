@@ -53,7 +53,7 @@ public class ImageData implements IGenerationTask<ImageData>{
 	
 	@Override
 	public String toString() {
-		return sourceFile.getName();
+		return sourceFile.getName()+" "+getOrientation(sourceFile);
 	}
 	
 	public static ImageOrientation getOrientation(File sourceFile) throws ImageProcessingException, IOException{
@@ -78,6 +78,7 @@ public class ImageData implements IGenerationTask<ImageData>{
 		}
 		}catch(Throwable t){
 			//No orientation information, no rotation will be done
+			t.printStackTrace();
 		}
 		return ImageOrientation.Normal;
 	}
