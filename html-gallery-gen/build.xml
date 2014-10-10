@@ -26,6 +26,7 @@
     			<attribute name="Implementation-Version" value="0.1"/>
     			<attribute name="Main-Class" value="hu.balazsgrill.gallery.GeneratorMain"/>
     			<attribute name="Class-Path" value="xmpcore.jar metadata-extractor-2.6.4.jar"/>
+    			<!-- Implicit dependency: xmpcore.jar -->
     		</manifest>
     	</jar>
     </target>
