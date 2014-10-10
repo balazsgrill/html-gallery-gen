@@ -56,7 +56,7 @@ public class ImageData implements IGenerationTask<ImageData>{
 		return sourceFile.getName()+" "+getOrientation(sourceFile);
 	}
 	
-	public static ImageOrientation getOrientation(File sourceFile) throws ImageProcessingException, IOException{
+	public static ImageOrientation getOrientation(File sourceFile){
 		try{
 		Metadata metadata = ImageMetadataReader.readMetadata(sourceFile);
 		// obtain the Exif directory
