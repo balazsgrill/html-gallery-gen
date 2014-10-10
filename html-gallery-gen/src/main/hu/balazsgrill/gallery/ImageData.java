@@ -168,8 +168,8 @@ public class ImageData implements IGenerationTask<ImageData>{
 
 	@Override
 	public int compareTo(ImageData o) {
-		String name = toString();
-		String oname = o.toString();
+		String name = sourceFile.getName();
+		String oname = o.sourceFile.getName();
 		return name.compareTo(oname);
 	}
 }
