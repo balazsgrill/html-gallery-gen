@@ -95,6 +95,7 @@ public class GalleryData implements IGenerationTask<GalleryData>{
 	}
 
 	public void collectData(){
+		System.out.println("Checkin "+name+"..");
 		subGalleries.clear();
 		images.clear();
 		
